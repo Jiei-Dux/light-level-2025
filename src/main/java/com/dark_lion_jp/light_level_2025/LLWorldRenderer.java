@@ -124,28 +124,29 @@ public class LLWorldRenderer {
   private static int getTextColor(World world, int blockLightLevel, int skyLightLevel) {
     Config.Hex textColorHex;
     Identifier currentDimension = world.getRegistryKey().getValue();
+
     if (currentDimension.equals(World.OVERWORLD.getValue())) {
-      if (blockLightLevel > 0) {
-        textColorHex = config.text.color.safe;
-      } else if (skyLightLevel > 7) {
-        textColorHex = config.text.color.warning;
-      } else {
-        textColorHex = config.text.color.danger;
-      }
+        if (blockLightLevel >= 8) {
+            textColorHex = config.text.color.safe;
+        } else if (blockLightLevel >= 1) {
+            textColorHex = config.text.color.warning;
+        } else {
+            textColorHex = config.text.color.danger;
+        }
     } else if (currentDimension.equals(World.NETHER.getValue())) {
-      if (blockLightLevel > 11) {
-        textColorHex = config.text.color.safe;
-      } else {
-        textColorHex = config.text.color.danger;
-      }
+        if (blockLightLevel > 11) {
+            textColorHex = config.text.color.safe;
+        } else {
+            textColorHex = config.text.color.danger;
+        }
     } else if (currentDimension.equals(World.END.getValue())) {
-      if (blockLightLevel > 0) {
-        textColorHex = config.text.color.safe;
-      } else {
-        textColorHex = config.text.color.danger;
-      }
+        if (blockLightLevel > 0) {
+            textColorHex = config.text.color.safe;
+        } else {
+            textColorHex = config.text.color.danger;
+        }
     } else {
-      textColorHex = config.text.color.neutral;
+        textColorHex = config.text.color.neutral;
     }
 
     return textColorHex.value;
